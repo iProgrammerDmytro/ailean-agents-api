@@ -1,0 +1,33 @@
+services:
+  api:
+    build:
+      context: .
+    container_name: ailean_api
+    volumes:
+      - .:/app
+    env_file: .env
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: ailean_db
+    environment:
+      POSTGRES_DB: ailean
+      POSTGRES_USER: ailean
+      POSTGRES_PASSWORD: ailean
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
+      interval: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  pgdata:
