@@ -22,10 +22,15 @@
 
 ```bash
 git clone https://github.com/iProgrammerDmytro/ailean-agents-api.git
-cd ailean‑agents‑api
+cd ailean-agents-api
 ```
 
-### 2. Build & Run the Stack
+### 2. Copy the environment file
+```
+cp .env.example .env
+```
+
+### 3. Build & Run the Stack
 
 ```bash
 docker compose up --build   # first time (build + run)
@@ -82,6 +87,15 @@ app/
 
 ---
 
+## 🌐 Live Demo
+
+| Resource | URL |
+| :------- | :-- |
+| **Swagger UI** | https://ailean-agents-api.onrender.com/docs |
+| **Base API endpoint** | https://ailean-agents-api.onrender.com |
+
+---
+
 ## 📦 Sample Payload – `POST /agents`
 
 | Field | Type | Allowed values | Notes |
@@ -98,7 +112,7 @@ app/
   "name": "string",
   "type": "Sales",
   "status": "Active",
-  "description": "string",
+  "description": "string"
 }
 ```
 
@@ -109,7 +123,7 @@ app/
   "name": "Hotel Q&A Bot",
   "type": "Support",
   "status": "Active",
-  "description": "Answers common questions about The Grand Arosa pop‑up hotel.",
+  "description": "Answers common questions about The Grand Arosa pop‑up hotel."
 }
 ```
 
